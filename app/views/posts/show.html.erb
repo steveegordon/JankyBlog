@@ -1,0 +1,30 @@
+<h1 class="bg-success"><%= @post.title %> </h1>
+<p class="bg-info"><%= @post.body %></p>
+<p class="bg-info"><%= @post.date_published %></p>
+<% @comments.each do |comment|%>
+<p class="bg-danger"><%= comment.body %>
+<% if comment.user %>
+<%= comment.user.name %>
+<% else %>
+Posted by: <h4>Anonymous</h4>
+<% end %>
+<% end %>
+
+
+<div class="container">
+<%= form_for ([@post, Comment.new]) do |f| %>
+
+<%= f.label :body %>
+<%= f.text_area :body %>
+<%= f.submit %>
+<% end %>
+
+
+<!-- 
+<%= form_tag(post_comments_path(@post), method: :post)do %>
+<div class="form-group">
+  <%= text_area_tag :body %>
+  </div>
+  <%= submit_tag "Post Comment", class: "btn btn-info active" %>
+  <% end %>
+<% link_to "All Posts", posts_path, class: "btn btn-warning btn-sm" %> -->
